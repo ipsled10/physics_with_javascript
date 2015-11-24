@@ -6,3 +6,16 @@ motion is effect.force is cause.the motion of an object is the result of the for
 *******************************************************************
 The law of motion:the precise mathematical form of the function that relattes a force to the motion it produces.
 force laws:-In other words,how to calculate the forces.There are equations that tell you how to calculate each type of force.
+
+******************************************************************
+Physics-> equations-> algorithms-> code
+******************************************************************
+
+A simple physics simulation example
+lets see the motion of a ball thrown to the ground(physics of bouncing ball)
+the force acting on the ball->force of gravity that the earth exerts on the ball.assuming that gravity is the only force acting on the ball.
+
+gravity is a constant force that points vertically downward.its effect is to pull objects downward,making them accelarte as they do.accelarate means it increases the speed of the object.gravity doesnot affect the horizontal speed of an object.
+everyt time the ball hits the ground,the latter exerts a contact force on it(a contact force is a force that two solid objects exert on each other when in direct contact).This force acts upward for a very brief time.unlike gravity,it is not easy to model this contac force directly.so to simplify things.its effect is to reverse the motion of the ball from downward to upward while reducing the speed of the ball.
+
+
