@@ -1,0 +1,8 @@
+much of physics deals with how things move under the action of different types of influences.these influences can be from other things and from the environment.Example include gravity, friction, and air resistance.in physics we have a special name for these influences:they are called forces.
+motion = function{forces}
+the word function is there to show a cause-and-effect relationship.forces cause objects to move in different ways.or that the motion of an object can be seen as the output of a function with forces as input.
+motion is effect.force is cause.the motion of an object is the result of the forces acting on it.the mathematical relationship between force and motion is known as the "Law of Motion."
+
+*******************************************************************
+The law of motion:the precise mathematical form of the function that relattes a force to the motion it produces.
+force laws:-In other words,how to calculate the forces.There are equations that tell you how to calculate each type of force.

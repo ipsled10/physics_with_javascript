@@ -1,0 +1,178 @@
+inheritance in javascript
+using prototype.The prototype is the property of a function.
+a function is also an object and hence has properties.
+a function object that is intended to be used for constructing new objects is called
+constructor.
+
+function Particle(pname){
+  this.name = pname;
+  this.move = function(){
+    console.log(this.name + "is moving");
+  }
+}
+
+the keyword this ensures that these properties are accessible outside the constructor.
+particle1 = new Particle("electron");
+particle1.name; //returns "electron"
+particle1.move();//returns "electron is moving"
+
+to add new properties to the parent object so that they are inherited by all instances
+of the object,you need to assign those properties to the parent's prototype.
+for example to add a new property mass and a new method stop() to the Particle object
+Particle.prototype.mass = 1;
+Particle.prototype.stop = function(){console.log("I have stopped");}
+These are then available to all instances of Particle,even those instantiated
+previously,for example
+particle1.mass;//returns 1
+note that the value of particle1.mass thereafter be changed independently of the default
+value inherited from Particle.prototype.mass,for example
+particle1.mass = 2; returns 2
+Particle.prototype.mass; return 1
+
+other properties can be added to the instance and of course they don't propagate
+to the parent object or to other instances.for example, this line:
+particle1.spin = 0;//adds a new property called spin to particle1 and gives it value of 0
+other instances of Particle will not have that property by default.
+****************************************************************************
+static properties and methods
+Particle.lifetime = 100;// this creates a static property of Particle that is accessible
+without the need to instantiate the object.on the other hand instances of Particle
+don't inherit the static property.
+***************************************************************************
+Datatypes in javascript
+Number(64 bit double-precision floating-point number)
+String(A sequence of 16-bit characters)
+Boolearn(true and false,or 1 and 0)
+Undefined(returned for a nonexistant object property or a variable without a value)
+Null(has only one value:null)
+Object(holds a collecction of properties and methods)
+Array
+Function(a callable object that executes a block of code)
+Number works from 1.8*10^308 upto 5*10^-324 given that the number of atoms in the visible
+universe is estimated to be only 10^80 this seems ok.
+
+The Number data type also inludes NaN,Infinity and -Infinity.Nan siginfies that
+a numeric value hasnot been assigned
+var arr = new Array()
+or arr = [1,2,3];
+var arr2 = new Array(x,y);
+arr2[0][1] = 1 ...
+
+Math module
+Math.abs(a)
+Math.pow(a,b)
+Math.sqrt(a)
+Math.ceil(a)
+Math.floor(a)
+Math.round(a)
+Math.max(a,b,c,...)
+Math.min(a,b,c....)
+Math.random()//between 0 and 1
+
+
+for loop
+using for loop to create a bunch of balls
+function init(){
+balls = new Array();
+for(var i=0;i < num_balls;i++){
+  var ball = new Ball(raidus.color);
+  ball.x = 50;
+  ball.y = 50;
+  ball.vx = Math.random()*5;
+  ball.vy = (Math.random()-0.5)*4;
+  ball.draw(context);
+  balls.push(ball);
+}
+setInterval(on_each_step,1000/60);
+}
+function on_each_step(){
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  for(var i=0;i<numBalls;i++){
+    var ball = balls[i];
+    ball.vy +=g;
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+    if(ball.y > canvas.height - radius){
+      ball.y = canvas.height -radius;
+      ball.vy *= -0.8;
+    }
+    if(ball.x > canvas.width + radius){
+      ball.x = -ra
+    }
+    ball.draw(context);
+  }
+}
+
+**********************************************************************
+Event listeners and handlers
+some_element.addEventListener(event_type, handler[,useCapture])
+and some_element.removeEventListener(event_type,handler[,useCapture])
+
+User Interaction:keyboard,mouse and touch events
+suppose we want to pause the bouncing_ball animation when the use clicks and holds
+down the mouse,and resume it when the mouse is released
+
+function init(){
+  canvas.addEventListener("mousedown",stop_anim,false);
+  canvas.addEventListener("mouseup",start_anim,false);
+  start_anim();
+}
+
+function start_anim(){
+  interval = setInterval(on_each_step,1000/60);
+}
+
+function stop_anim(){
+  clearInterval(interval);
+}
+***********************************************************************
+drag and drop
+simple trick is to force the postion of the object to match that of the mouse cursor
+when the mouse is pressed on the object an moved around.
+so we can add the following code on the init() function
+canvas.addEventListener("mousedown", function(){
+  canvas.addEventListener("mousemove",on_drag,false);
+  canvas.addEventListener("mouseup",on_drop,false);
+})
+function on_drag(evt){
+  is_dragging = true;
+  ball.x = evt.clientX;
+  ball.y = evt.clientY;
+}
+function on_drop(){
+  is_dragging = false;
+  canvas.removeEventListener("mousemove",on_drag,false);
+  canvas.removeEventListerner("mouseup",on_drop,false);
+}
+
+the clientX and clientY properties provide a simple way to track the mouse location.
+***************************************************************************
+The canvas context
+var canvas = document.getElementById("canvas")
+var context = canvas.getContext("2d");
+DRAWING LINES AND CURVES
+-the strokeStyle property specifies the line color in css-style format.default is black
+-the lineWidth is thickness in pixels.default valut is 1.
+-the beginPath() method resets the current path.a path is a collection of subpaths.
+each subpath is a set of points connected by straight or curved lines.
+-the closepath()method closes the current subpath and starts a new one from the end of the closed path
+the moveTo(x,y) method moves the cursor to the specifed location.without drawing anything
+-lineTo(x,y)draws a straight line from the current location to the new location
+-arc(x,y,radius,startAngle,endAngle,anticlockwise)method adds an arc to the path
+with center(x, y)and of the specified radius.The starting and ending angles are in radians.
+the anticlockwise paramerter is a boolean.if true the arc is drawn anticlockwise
+-rect(x,y,w,h)-rectangle closed one
+-stroke()
+-strokeRect(x,y,w,h)combines rect() and stroke()
+
+to draw a blue 2-pixel straight line from the point(50,100) to(250,400) you would do
+context.strokeStyle = "#000ff";
+context.lineWidth = 2;
+context.beginPath();
+context.moveTo(50,100);
+context.moveTo(250,400);
+context.stroke();//if this not here then nothing will be rendered and the path will be invisible
+CREATING FILLS AND GRADIENTS
+fillStyle = style for fillsing shapes
+fill() method fills subpaths using the current full style
+fillRect(x,y,w,h)
